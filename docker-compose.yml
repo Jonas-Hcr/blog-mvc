@@ -6,11 +6,12 @@ services:
     build:
       context: .
     ports:
-      - "8000:8000"
+      - "8000:80"
     depends_on:
       - db
     volumes:
       - ./:/var/www/html
+      - ./apache/vhost.conf:/etc/apache2/sites-available/000-default.conf
 
   db:
     image: mysql:latest
