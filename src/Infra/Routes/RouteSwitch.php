@@ -2,6 +2,8 @@
 
 namespace Jonashcr\Blog\Infra\Routes;
 
+use Jonashcr\Blog\Setup\Setup;
+
 class RouteSwitch
 {
     protected function home()
@@ -12,6 +14,12 @@ class RouteSwitch
     protected function admin()
     {
         require __DIR__ . '../../../admin/index.php';
+    }
+
+    protected function setup()
+    {
+        $setup = new Setup();
+        $setup->run();
     }
 
     public function __call($name, $arguments)
