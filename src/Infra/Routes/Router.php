@@ -15,6 +15,7 @@ class Router extends RouteSwitch
             return;
         }
 
+        $route = parse_url($route)['path'] ?? '';
         $route = str_replace('/', '_', $route);
 
         if ($route === '') {
