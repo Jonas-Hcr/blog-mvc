@@ -1,0 +1,36 @@
+<?php
+$isEdit = isset($post);
+?>
+
+<?php if ($isEdit) : ?>
+    <input type="hidden" name="id" value="<?= $post['id']; ?>">
+<?php endif; ?>
+
+<div class="mb-3">
+    <label for="title">Título:</label>
+    <input type="text" id="title" name="title" value="<?= $isEdit ? $post['title'] : '' ?>" required>
+</div>
+
+<div class="mb-3">
+    <label for="slug">URL:</label>
+    <input type="text" id="slug" name="slug" value="<?= $isEdit ? $post['slug'] : '' ?>" required>
+</div>
+
+<div class="mb-3">
+    <label>Imagem:</label>
+    <input type="file" name="image" value="<?= $isEdit ? $post['image'] : ''  ?>">
+</div>
+
+<div class="mb-3">
+    <label for="content">Conteúdo:</label>
+    <textarea id="content" name="content" cols="30" rows="10"><?= $isEdit ? $post['content'] : '' ?></textarea>
+
+</div>
+
+<div class="mb-3">
+    <label for="status">Status</label>
+    <select name="status" id="status">
+        <option value="1" <?= $isEdit && $post['status'] ? 'selected' : '' ?>>Habilitado</option>
+        <option value="0" <?= $isEdit && !$post['status'] ? 'selected' : '' ?>>Desabilitado</option>
+    </select>
+</div>
