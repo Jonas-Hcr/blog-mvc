@@ -25,6 +25,11 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/admin/user">Usuários Administrativos</a>
                 </li>
+                <?php if (\Jonashcr\Admin\Users\User::$role == 'Admin'): ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/backup">Backup</a>
+                    </li>
+                <?php endif ?>
             </ul>
         </div>
     </div>

@@ -1,2 +1,3 @@
 vendor/
 src/Blog/view/assets/posts/
+src/Admin/download/dump/

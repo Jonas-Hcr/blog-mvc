@@ -1,6 +1,11 @@
 # Imagem oficial do PHP 8.2 Apache
 FROM php:8.2-apache
 
+# Instalação do cliente MySQL para a feature Backup
+RUN apt-get update && \
+    apt-get install -y default-mysql-client && \
+    rm -rf /var/lib/apt/lists/*
+
 RUN docker-php-ext-install mysqli pdo pdo_mysql
 
 # Habilita o módulo rewrite do Apache

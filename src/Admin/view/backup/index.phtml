@@ -1,0 +1,17 @@
+<?php include(ADMIN_VIEW . '/components/header.phtml') ?>
+
+<body>
+    <h2>Fazer Backup</h2>
+
+    <?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
+        <p>Backup realizado com sucesso! <a href="<?= $_GET['path']; ?>" download>Download do Backup</a></p>
+    <?php elseif (isset($_GET['error']) && $_GET['error'] == 1): ?>
+        <p>Ocorreu um erro ao fazer o backup.</p>
+    <?php endif; ?>
+
+    <form action="/admin/backup?action=backup" method="post">
+        <button class="btn btn-primary" type="submit">Fazer Backup</button>
+    </form>
+</body>
+
+<?php include(ADMIN_VIEW . '/components/footer.phtml') ?>

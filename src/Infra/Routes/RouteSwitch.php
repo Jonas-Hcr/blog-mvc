@@ -3,6 +3,7 @@
 namespace Jonashcr\Infra\Routes;
 
 use Jonashcr\Admin\Auth\Login;
+use Jonashcr\Admin\Backup\Backup;
 use Jonashcr\Admin\Posts\Posts;
 use Jonashcr\Admin\Users\User;
 use Jonashcr\Admin\Users\Users;
@@ -89,6 +90,28 @@ class RouteSwitch
         }
 
         $this->defineAction(new Posts(), $action);
+    }
+
+    protected function admin_backup()
+    {
+        if (!$this->validUser()) {
+            $this->admin_login();
+            return;
+        }
+
+        if (!RouteSwitch::validateRole()) {
+            $this->__call('', '');
+            return;
+        }
+
+        $action = isset($_GET['action']) ? $_GET['action'] : 'index';
+
+        $backup = new Backup();
+        
+        match ($action) {
+            'backup' => $backup->backup(),
+            default => $backup->index(),
+        };
     }
 
     private function defineAction($controller, String $action)
