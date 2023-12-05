@@ -2,6 +2,7 @@
 
 namespace Jonashcr\Infra\Routes;
 
+use Jonashcr\Admin\Auth\Login;
 use Jonashcr\Setup\Setup;
 
 class RouteSwitch
@@ -13,7 +14,28 @@ class RouteSwitch
 
     protected function admin()
     {
-        require __DIR__ . '../../../admin/index.php';
+        if (isset($_SESSION['user_id'])) {
+            $this->admin_home();
+            return;
+        }
+        header('Location: admin/login');
+        $this->admin_login();
+    }
+
+    protected function admin_login()
+    {
+        $login = new Login();
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $login->auth($_POST);
+            return;
+        }
+
+        $login->index();
+    }
+
+    protected function admin_home()
+    {
+        require ADMIN_VIEW . '/index.phtml';
     }
 
     protected function setup()
