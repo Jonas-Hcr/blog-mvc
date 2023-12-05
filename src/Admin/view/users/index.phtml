@@ -1,8 +1,14 @@
-<?php include(ADMIN_VIEW . '/components/header.phtml') ?>
+<?php
+
+use Jonashcr\Admin\Users\User;
+
+include(ADMIN_VIEW . '/components/header.phtml') ?>
 
 <h2>Lista de Usuários</h2>
 
-<a class="btn btn-primary" href="/admin/user?action=createForm">Novo Usuário</a>
+<?php if (User::$role == 'Admin') : ?>
+    <a class="btn btn-primary" href="/admin/user?action=createForm">Novo Usuário</a>
+<?php endif ?>
 
 <table border="1" style="width: 95%;margin: 0 19px;">
     <tr>
@@ -12,19 +18,21 @@
         <td>Permissão</td>
         <td>Ação</td>
     </tr>
-    <?php foreach ($users as $user): ?>
+    <?php foreach ($users as $user) : ?>
         <tr>
             <td><?= $user['id']; ?></td>
             <td><?= $user['username']; ?></td>
             <td><?= $user['email']; ?></td>
             <td><?= $user['role']; ?></td>
-            <td>
-                <a class="btn btn-secondary" href="/admin/user?action=edit&id=<?= $user['id']; ?>">Editar</a>
-                <form action="/admin/user?action=delete" method="post">
-                    <input type="hidden" name="id" value="<?= $user['id']; ?>">
-                    <button type="submit" class="btn btn-danger" onclick="return confirm('Deseja excluir este usuário?')">Excluir</button>
-                </form>
-            </td>
+            <?php if (User::$role == 'Admin') : ?>
+                <td>
+                    <a class="btn btn-secondary" href="/admin/user?action=edit&id=<?= $user['id']; ?>">Editar</a>
+                    <form action="/admin/user?action=delete" method="post">
+                        <input type="hidden" name="id" value="<?= $user['id']; ?>">
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('Deseja excluir este usuário?')">Excluir</button>
+                    </form>
+                </td>
+            <?php endif ?>
         </tr>
     <?php endforeach; ?>
 </table>

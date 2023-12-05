@@ -19,8 +19,8 @@ $isEdit = isset($user);
 <div class="mb-3">
     <label for="role">Permissão</label>
     <select name="role" id="role">
-        <option value="Admin" <?= $user['role'] == 'Admin' ? 'selected' : '' ?> >Administrativo</option>
-        <option value="Visitor" <?= $user['role'] == 'Visitor' ? 'selected' : '' ?>>Visitante</option>
+        <option value="Admin" <?= $isEdit && $user['role'] == 'Admin' ? 'selected' : '' ?> >Administrativo</option>
+        <option value="Visitor" <?= $isEdit && $user['role'] == 'Visitor' ? 'selected' : '' ?>>Visitante</option>
     </select>
 </div>
 

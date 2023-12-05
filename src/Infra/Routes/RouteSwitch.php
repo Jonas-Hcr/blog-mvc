@@ -3,11 +3,17 @@
 namespace Jonashcr\Infra\Routes;
 
 use Jonashcr\Admin\Auth\Login;
+use Jonashcr\Admin\Users\User;
 use Jonashcr\Admin\Users\Users;
 use Jonashcr\Setup\Setup;
 
 class RouteSwitch
 {
+    static public function validateRole($role = 'Admin')
+    {
+        return User::$role == $role;
+    }
+
     protected function home()
     {
         require __DIR__ . '../../../blog/index.php';
@@ -52,7 +58,17 @@ class RouteSwitch
 
     protected function admin_user()
     {
+        if (!$this->validUser()) {
+            $this->admin_login();
+            return;
+        }
+
         $action = isset($_GET['action']) ? $_GET['action'] : '';
+
+        if (!empty($action) && !RouteSwitch::validateRole()) {
+            $this->__call('', '');
+            return;
+        }
 
         $this->actionUser($action);
     }
@@ -69,7 +85,6 @@ class RouteSwitch
             'delete' => $users->delete(),
             default => $users->index(),
         };
-        
     }
 
     protected function validUser()

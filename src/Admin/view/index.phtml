@@ -1,15 +1,22 @@
-<?php include('components/header.phtml') ?>
+<?php
+
+use Jonashcr\Admin\Users\User;
+
+ include('components/header.phtml') ?>
 
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="card">
                 <div class="card-header">
-                    Bem-vindo ao Admin
+                    Bem-vindo ao Painel Administrativo, <?= $_SESSION['username'] ?>
                 </div>
                 <div class="card-body">
-                    <p>Você está logado como 
-                        ADmin
+                    <p>Você está logado como usuário 
+                        <?= match (User::$role) {
+                            'Admin' => 'administrador',
+                            'Visitor' => 'visitante',
+                        } ?>
                     </p>
                     <a href="logout.php" class="btn btn-danger">Logout</a>
                 </div>

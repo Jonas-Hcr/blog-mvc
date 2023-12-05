@@ -2,6 +2,7 @@
 
 namespace Jonashcr\Admin\Auth;
 
+use Jonashcr\Admin\Users\User;
 use Jonashcr\Infra\ConnectDB;
 use PDO;
 
@@ -39,6 +40,15 @@ class Login
     
         if ($user && password_verify($password, $user['password'])) {
             $_SESSION['user_id'] = $user['id'];
+            $_SESSION['username'] = $user['username'];
+            $_SESSION['role'] = $user['role'];
+
+            new User(
+                $user['id'],
+                $user['username'],
+                $user['role']
+            );
+
             header('Location: /admin/home');
             return;
         } else {
