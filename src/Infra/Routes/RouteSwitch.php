@@ -3,6 +3,7 @@
 namespace Jonashcr\Infra\Routes;
 
 use Jonashcr\Admin\Auth\Login;
+use Jonashcr\Admin\Users\Users;
 use Jonashcr\Setup\Setup;
 
 class RouteSwitch
@@ -47,6 +48,28 @@ class RouteSwitch
         }
         header('Location: /admin/login');
         $this->admin_login();
+    }
+
+    protected function admin_user()
+    {
+        $action = isset($_GET['action']) ? $_GET['action'] : '';
+
+        $this->actionUser($action);
+    }
+
+    private function actionUser(String $action)
+    {
+        $users = new Users();
+
+        match ($action) {
+            'createForm' => $users->createForm(),
+            'save' => $users->save(),
+            'edit' => $users->edit(),
+            'update' => $users->update(),
+            'delete' => $users->delete(),
+            default => $users->index(),
+        };
+        
     }
 
     protected function validUser()

@@ -1,0 +1,11 @@
+<?php include(ADMIN_VIEW . '/components/header.phtml') ?>
+
+<h2>Editar Usuário</h2>
+
+<form method="post" action="/admin/user?action=update">
+    <?php include('form.phtml') ?>
+
+    <button class="btn btn-primary" type="submit">Salvar</button>
+</form>
+
+<?php include(ADMIN_VIEW . '/components/footer.phtml') ?>
