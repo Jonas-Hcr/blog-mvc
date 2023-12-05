@@ -1,6 +1,6 @@
 <?php
 
-namespace Jonashcr\Blog\Infra;
+namespace  Jonashcr\Infra;
 
 class ConnectDB
 {

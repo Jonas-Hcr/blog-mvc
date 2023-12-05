@@ -1,8 +1,8 @@
 <?php
 
-namespace Jonashcr\Blog\Infra\Routes;
+namespace Jonashcr\Infra\Routes;
 
-use Jonashcr\Blog\Infra\Routes\RouteSwitch;
+use Jonashcr\Infra\Routes\RouteSwitch;
 
 class Router extends RouteSwitch
 {

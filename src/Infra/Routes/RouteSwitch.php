@@ -1,8 +1,8 @@
 <?php
 
-namespace Jonashcr\Blog\Infra\Routes;
+namespace Jonashcr\Infra\Routes;
 
-use Jonashcr\Blog\Setup\Setup;
+use Jonashcr\Setup\Setup;
 
 class RouteSwitch
 {
@@ -25,6 +25,6 @@ class RouteSwitch
     public function __call($name, $arguments)
     {
         http_response_code(404);
-        require __DIR__ . '../../../blog/404.php';
+        require __DIR__ . '../../../Blog/404.php';
     }
 }

@@ -1,7 +1,7 @@
 {
     "autoload": {
         "psr-4": {
-            "Jonashcr\\Blog\\": "src/"
+            "Jonashcr\\": "src/"
         }
     }
 }

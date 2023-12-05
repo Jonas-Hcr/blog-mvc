@@ -5,7 +5,8 @@
  * criando as tabelas necessárias para rodar o projeto.
  *  E mantém o versionamento do banco.
  */
-namespace Jonashcr\Blog\Setup;
+
+namespace Jonashcr\Setup;
 
 class Setup
 {
@@ -44,6 +45,22 @@ class Setup
             $db->exec($sqlPosts);
 
             echo "<h1>Tabelas Criadas com Sucesso!</h1>";
+
+            /* SEED - Usuário Admin */
+            $username = 'admin';
+            $email = 'admin@jonashcr.com.br';
+            $password = password_hash('@dmin123', PASSWORD_BCRYPT);
+            $role = 'Admin';
+
+            $stmt = $db->prepare("INSERT INTO users (username, email, password, role) VALUES (:username, :email, :password, :role)");
+            $stmt->bindParam(':username', $username);
+            $stmt->bindParam(':email', $email);
+            $stmt->bindParam(':password', $password);
+            $stmt->bindParam(':role', $role);
+
+            $stmt->execute();
+
+            echo "<h2>Seed de User Criada com Sucesso!</h2>";
         } catch (\Throwable $th) {
             echo sprintf("<h1>Erro ao criar tabelas: %s </h1>", $th);
         }
