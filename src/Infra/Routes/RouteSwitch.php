@@ -14,7 +14,7 @@ class RouteSwitch
 
     protected function admin()
     {
-        if (isset($_SESSION['user_id'])) {
+        if ($this->validUser()) {
             $this->admin_home();
             return;
         }
@@ -24,9 +24,15 @@ class RouteSwitch
 
     protected function admin_login()
     {
+        if ($this->validUser()) {
+            $this->admin_home();
+            return;
+        }
+
         $login = new Login();
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $login->auth($_POST);
+            header('Location: /admin/home');
             return;
         }
 
@@ -35,7 +41,17 @@ class RouteSwitch
 
     protected function admin_home()
     {
-        require ADMIN_VIEW . '/index.phtml';
+        if ($this->validUser()) {
+            require ADMIN_VIEW . '/index.phtml';
+            return;
+        }
+        header('Location: /admin/login');
+        $this->admin_login();
+    }
+
+    protected function validUser()
+    {
+        return isset($_SESSION['user_id']);
     }
 
     protected function setup()
