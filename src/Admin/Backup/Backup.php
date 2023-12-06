@@ -4,11 +4,17 @@ namespace Jonashcr\Admin\Backup;
 
 class Backup
 {
+    /**
+     * Renderiza a tela de backup
+     */
     public function index()
     {
         require ADMIN_VIEW . '/backup/index.phtml';
     }
 
+    /**
+     * Cria um novo backup, salva na pasta, e disponibiliza link para download
+     */
     public function backup()
     {
         $outputPath = $this->createBackup();

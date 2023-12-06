@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Classe responsável pelos dados do usuário logado. 
+ * Utilizada para validar as $roles
+ */
+
 namespace Jonashcr\Admin\Users;
 
 class User

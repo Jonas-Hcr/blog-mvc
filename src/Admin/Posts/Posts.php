@@ -7,6 +7,9 @@ use Jonashcr\Infra\ConnectDB;
 class Posts
 {
 
+    /**
+     * Obtém os posts
+     */
     private function getPosts()
     {
         $connect = new ConnectDB();
@@ -70,6 +73,9 @@ class Posts
         }
     }
 
+    /**
+     * Salva a imagem no projeto, e o path no banco de dados
+     */
     private function saveImage($post_image): string|bool
     {
         $folderPath = BLOG_VIEW . "/assets/posts/";

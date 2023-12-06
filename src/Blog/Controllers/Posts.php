@@ -6,6 +6,9 @@ use Jonashcr\Infra\ConnectDB;
 
 class Posts
 {
+    /**
+     * Exibe a tela inicial dos posts
+     */
     public function index()
     {
         $connect = new ConnectDB();
@@ -17,6 +20,9 @@ class Posts
         require BLOG_VIEW . '/posts/index.phtml';
     }
 
+    /**
+     * Exibe cada post separadamente
+     */
     public function show($slug)
     {
         $connect = new ConnectDB();
