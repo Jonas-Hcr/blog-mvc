@@ -21,7 +21,19 @@ class Router extends RouteSwitch
         if ($route === '') {
             $this->home();
         } else {
-            $this->$route();
+            switch ($route) {
+                case 'setup':
+                    $this->setup();
+                    break;
+
+                case strpos($route, 'admin') !== false:
+                    $this->$route();
+                    break;
+
+                default:
+                    $this->getPosts($route);
+                    break;
+            }
         }
     }
 
@@ -39,7 +51,7 @@ class Router extends RouteSwitch
             readfile($route);
             exit();
         }
-        
+
         echo "<p>Arquivo não encontrado</p>";
         return;
     }

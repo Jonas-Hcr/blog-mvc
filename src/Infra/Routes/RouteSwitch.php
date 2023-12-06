@@ -2,6 +2,7 @@
 
 namespace Jonashcr\Infra\Routes;
 
+use Jonashcr\Blog\Controllers\Posts as PostFrontOfficeController;
 use Jonashcr\Admin\Auth\Login;
 use Jonashcr\Admin\Backup\Backup;
 use Jonashcr\Admin\Posts\Posts;
@@ -16,9 +17,16 @@ class RouteSwitch
         return User::$role == $role;
     }
 
+    protected function getPosts($route)
+    {
+        $postFrontOffice = new PostFrontOfficeController();
+        $postFrontOffice->show($route);
+    }
+
     protected function home()
     {
-        require __DIR__ . '../../../blog/index.php';
+        $postFrontOffice = new PostFrontOfficeController();
+        $postFrontOffice->index();
     }
 
     protected function admin()
@@ -107,7 +115,7 @@ class RouteSwitch
         $action = isset($_GET['action']) ? $_GET['action'] : 'index';
 
         $backup = new Backup();
-        
+
         match ($action) {
             'backup' => $backup->backup(),
             default => $backup->index(),

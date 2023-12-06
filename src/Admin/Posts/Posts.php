@@ -57,12 +57,12 @@ class Posts
             $connect = new ConnectDB();
             $db = $connect->getConnection();
         
-            $stmt = $db->prepare("INSERT INTO posts (title, slug, content, status, image) VALUES (:title, :slug, :content, :status, :image)");
+            $stmt = $db->prepare("INSERT INTO posts (title, slug, content, `status`, `image`) VALUES (:title, :slug, :content, :status, :image)");
             $stmt->bindParam(':title', $title);
             $stmt->bindParam(':slug', $slug);
             $stmt->bindParam(':content', $content);
             $stmt->bindParam(':status', $status);
-            $stmt->bindParam(':image', $target);
+            $stmt->bindParam(':image', $image);
             $stmt->execute();
         
             header('Location: /admin/posts');
@@ -72,7 +72,13 @@ class Posts
 
     private function saveImage($post_image): string|bool
     {
-        $target = BLOG_VIEW . "/assets/posts/" . basename($post_image);
+        $folderPath = BLOG_VIEW . "/assets/posts/";
+        $target = $folderPath . basename($post_image);
+        
+        if (!is_dir($folderPath)) {
+            mkdir($folderPath, 0777, true);
+        }
+
         if (!move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
             return false;
         }

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Posts</title>
+</head>
+<body>
+    <?php include(BLOG_VIEW . '/includes/header.phtml') ?>
+    <h2>Lista de Posts</h2>
+
+    <?php foreach ($posts as $post): ?>
+        <div class="mb-6">
+            <h3><?= $post['title'] ?></h3>
+            <p><?= $post['content'] ?></p>
+        </div>
+        <div class="mb-6">
+            <a href="<?= $post['slug'] ?>" type="button" class="btn btn-primary">Visualizar</a>
+        </div>
+    <?php endforeach; ?>
+
+    <?php include(BLOG_VIEW . '/includes/footer.phtml') ?>
+</body>
+</html>
